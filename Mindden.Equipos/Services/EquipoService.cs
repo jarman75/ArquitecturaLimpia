@@ -7,21 +7,22 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mindden.Equipos.Services.Interfaces;
 
 namespace Mindden.Equipos.Services
 {
     public class EquipoService : IEquipoService
     {
                 
-        private readonly IEquipoRepository equipoRepository;        
-
+        private readonly IEquipoRepository equipoRepository;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipoService"/> class.
         /// </summary>
         /// <param name="equipoRepository">The equipo repository.</param>
         public EquipoService(IEquipoRepository equipoRepository)
         {
-            this.equipoRepository = equipoRepository;        
+            this.equipoRepository = equipoRepository;            
         }
 
         /// <summary>
@@ -136,15 +137,13 @@ namespace Mindden.Equipos.Services
 
                 equipo.NombreEquipo = dsEquipo.NombreEquipo;
                 equipo.SetUbicacion(dsEquipo.Ubicacion, dsEquipo.Cliente);
-                
-                //elimina desarrolaldores equipo actaul
-                foreach(DesarrolladorEquipo d in equipo.Desarrolladores)
-                {
-                    equipo.RemoveDesarrollador(d.Nombre);
-                }
-                
-                //añade desarrolladores del equipo modificado
+
+                equipo.RemoveAllDesarrolladores();
+
+                ////añade desarrolladores del equipo modificado
                 AgregarInformaticosAlEquipo(dsEquipo, equipo);
+
+                equipoRepository.Update(equipo);
 
                 response = new ActualizarEquipoResponse(StatusEnum.CorrectOperation);
 
@@ -191,5 +190,7 @@ namespace Mindden.Equipos.Services
             return response;
 
         }
+
+       
     }
 }

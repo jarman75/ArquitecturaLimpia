@@ -112,10 +112,13 @@ namespace Mindden.Equipos.Core.Entities.EquipoAggregate
                 throw new ArgumentException("El desarrollador no se encuentra en el equipo");
             }
 
-            _desarrolladores.Remove(des);
-
-            
-        }       
+            _desarrolladores.Remove(des);            
+        }  
+        
+        public void RemoveAllDesarrolladores()
+        {
+            _desarrolladores.Clear();
+        }
 
 
 
