@@ -3,9 +3,8 @@ using Mindden.Equipos.Core.Interfaces;
 
 namespace Mindden.Equipos.Services.DataService
 {
-    public class DtoBasicEquipo
+    public class DtoBasicEquipo : BaseEntity
     {
-        public int Id { get; set; }
         public string NombreEquipo { get; set; }
     }
         

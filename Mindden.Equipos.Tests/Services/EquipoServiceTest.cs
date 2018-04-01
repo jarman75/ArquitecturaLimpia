@@ -59,7 +59,7 @@ namespace Mindden.Equipos.Tests.Services
             Assert.Equal(ds.Cliente, responseGet.Equipo.Cliente);
             
             //compar que losvalores de las dos listas sean igual
-            Assert.True(informaticos.SequenceEqual(ds.Desarrolladores));                          
+            Assert.True(informaticos.SequenceEqual(responseGet.Equipo.Desarrolladores));                          
 
         }
 
@@ -124,7 +124,7 @@ namespace Mindden.Equipos.Tests.Services
             Assert.Equal(ds.Cliente, responseGet.Equipo.Cliente);
 
             //compar que losvalores de las dos listas sean igual
-            Assert.True(informaticos.SequenceEqual(ds.Desarrolladores));
+            Assert.True(informaticos.SequenceEqual(responseGet.Equipo.Desarrolladores));
 
         }
 

@@ -1,7 +1,7 @@
 ﻿using Mindden.Equipos.Services.DataService;
 using Mindden.Equipos.Services.Response;
 
-namespace Mindden.Equipos.Services
+namespace Mindden.Equipos.Services.Interfaces
 {
     public interface IEquipoService
     {

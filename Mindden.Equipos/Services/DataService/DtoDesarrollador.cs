@@ -1,11 +1,8 @@
-﻿using Mindden.Equipos.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Mindden.Equipos.Core.Entities;
 
 namespace Mindden.Equipos.Services.DataService
 {
-    public class DtoDesarrollador 
+    public class DtoDesarrollador: BaseEntity 
     {
         public string Nombre;
         public string Alias;
