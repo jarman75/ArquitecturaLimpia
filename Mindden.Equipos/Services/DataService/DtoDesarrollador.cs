@@ -1,11 +1,21 @@
-﻿using Mindden.Equipos.Core.Entities;
+﻿using Mindden.Equipos.Core.Common;
 
 namespace Mindden.Equipos.Services.DataService
 {
-    public class DtoDesarrollador: BaseEntity 
+    public class DtoDesarrollador : ValueObject
     {
-        public string Nombre;
-        public string Alias;
-        public int Experiencia;
+
+        public DtoDesarrollador(string nombre, string alias, int experiencia)
+        {
+            this.Nombre = nombre;
+            this.Alias = alias;
+            this.Experiencia = experiencia;
+        }        
+
+        public string Nombre { get; private set; }
+
+        public string Alias { get; private set; }
+
+        public int Experiencia { get; private set; }
     }
 }

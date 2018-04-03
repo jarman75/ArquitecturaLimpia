@@ -14,7 +14,7 @@ namespace Mindden.Equipos.Infrastructure.Configuration
                 
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<BaseEquipo, DtoBasicEquipo>();
+                cfg.CreateMap<Equipo, DtoBasicEquipo>();
                 cfg.CreateMap<DesarrolladorEquipo, DtoDesarrollador>();                
             });
                

@@ -1,6 +1,6 @@
 ﻿using Mindden.Equipos.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Mindden.Equipos.Core.Entities;
+using Mindden.Equipos.Core.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

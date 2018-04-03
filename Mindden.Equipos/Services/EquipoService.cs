@@ -49,6 +49,10 @@ namespace Mindden.Equipos.Services
                 response = new CrearEquipoResponse(StatusEnum.CorrectOperation,equipo.Id);
 
             }
+            catch (ArgumentNullException ex)
+            {
+                response = new CrearEquipoResponse(StatusEnum.NullExcepcion, ex.Message);
+            }
             catch (ArgumentException ex)
             {
                 response = new CrearEquipoResponse(StatusEnum.ValidationError, ex.Message);
@@ -63,6 +67,7 @@ namespace Mindden.Equipos.Services
 
         private static void ValidacionDataEquipo(DSEquipo dsEquipo)
         {
+            if (dsEquipo == null) throw new ArgumentNullException(nameof(dsEquipo));
             if (string.IsNullOrWhiteSpace(dsEquipo.NombreEquipo)) throw new ArgumentException("Nombre no contiene valor", nameof(dsEquipo.NombreEquipo));
             if (string.IsNullOrWhiteSpace(dsEquipo.Ubicacion)) throw new ArgumentException("Provincia no contiene valor", nameof(dsEquipo.Ubicacion));
             if (string.IsNullOrWhiteSpace(dsEquipo.Cliente)) throw new ArgumentException("Cliente no contiene valor", nameof(dsEquipo.Cliente));
@@ -171,8 +176,9 @@ namespace Mindden.Equipos.Services
             
             try
             {
-                List<BaseEquipo> listaBasica =  equipoRepository.ListBasic().ToList();
-                List<DtoBasicEquipo> equipos = new List<DtoBasicEquipo>();
+                
+                List<Equipo> listaBasica = equipoRepository.GetBaseList().ToList();
+                List<DtoBasicEquipo> equipos = new List<DtoBasicEquipo>();                                
 
                 
                 equipos = Mapper.Map<List<DtoBasicEquipo>>(listaBasica);
