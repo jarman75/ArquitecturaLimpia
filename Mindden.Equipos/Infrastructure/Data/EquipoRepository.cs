@@ -1,5 +1,4 @@
-﻿using Mindden.Equipos.Core.Entities;
-using Mindden.Equipos.Core.Entities.EquipoAggregate;
+﻿using Mindden.Equipos.Core.Entities.EquipoAggregate;
 using Mindden.Equipos.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -45,17 +44,22 @@ namespace Mindden.Equipos.Infrastructure.Data
                 .FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// Lists the basic.
-        /// </summary>
-        /// <returns></returns>
-        public ICollection<BaseEquipo> ListBasic()
+        public ICollection<Equipo> GetBaseList()
         {
-            return _dbContext.Equipos.Select(e => new BaseEquipo
-            {
-                Id = e.Id,
-                NombreEquipo = e.NombreEquipo
-            }).OrderBy(e=>e.Id).ToList();
+            return _dbContext.Equipos
+                .Select(e => new Equipo { Id = e.Id, NombreEquipo = e.NombreEquipo })                
+                .OrderBy(e => e.Id).ToList();
+        }
+
+        public async Task<ICollection<Equipo>> GetBaseListAsync()
+        {
+            var result = _dbContext.Equipos
+                .Select(e => new Equipo { Id = e.Id, NombreEquipo = e.NombreEquipo })
+                .OrderBy(e => e.Id);
+
+            return await result
+                .ToListAsync();
+                
         }
     }
 }

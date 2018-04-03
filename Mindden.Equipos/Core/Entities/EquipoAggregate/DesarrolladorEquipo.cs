@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mindden.Equipos.Core.Common;
+using System;
 
 namespace Mindden.Equipos.Core.Entities.EquipoAggregate
 {

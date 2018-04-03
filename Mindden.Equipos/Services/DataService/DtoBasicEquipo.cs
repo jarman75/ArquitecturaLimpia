@@ -1,11 +1,20 @@
-﻿using Mindden.Equipos.Core.Entities;
-using Mindden.Equipos.Core.Interfaces;
+﻿using Mindden.Equipos.Core.Common;
 
 namespace Mindden.Equipos.Services.DataService
 {
-    public class DtoBasicEquipo : BaseEntity
+    public class DtoBasicEquipo: ValueObject
     {
-        public string NombreEquipo { get; set; }
+        public DtoBasicEquipo(int id, string NombreEquipo)
+        {
+            this.Id = id;
+            this.NombreEquipo = NombreEquipo;
+        }
+
+
+        [IgnoreMember]
+        public int Id { get; private set; }
+
+        public string NombreEquipo { get; private set; }
     }
         
 }

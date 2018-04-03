@@ -1,5 +1,4 @@
-﻿using Mindden.Equipos.Core.Entities;
-using Mindden.Equipos.Core.Entities.EquipoAggregate;
+﻿using Mindden.Equipos.Core.Entities.EquipoAggregate;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,10 +22,15 @@ namespace Mindden.Equipos.Core.Interfaces
         /// <returns></returns>
         Task<Equipo> GetByIdWithItemsAsync(int id);
 
+
         /// <summary>
-        /// Lists the basic.
+        /// Gets the base list.
         /// </summary>
         /// <returns></returns>
-        ICollection<BaseEquipo> ListBasic(); 
+        ICollection<Equipo> GetBaseList();
+
+        Task<ICollection<Equipo>> GetBaseListAsync();
+
+
     }
 }

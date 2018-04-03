@@ -1,4 +1,4 @@
-﻿using Mindden.Equipos.Core.Entities;
+﻿using Mindden.Equipos.Core.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
