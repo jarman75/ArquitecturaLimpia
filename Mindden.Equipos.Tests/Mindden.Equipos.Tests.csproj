@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mindden.Equipos\Mindden.Equipos.csproj" />
+    <ProjectReference Include="..\Mindden.Equipos.Component\Mindden.Equipos.Component.csproj" />
   </ItemGroup>
 
 </Project>

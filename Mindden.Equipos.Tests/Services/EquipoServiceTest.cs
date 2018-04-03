@@ -3,10 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Mindden.Equipos.Infrastructure.Data;
-using Mindden.Equipos.Infrastructure.Configuration;
-using Mindden.Equipos.Services;
-using Mindden.Equipos.Services.Response;
-using Mindden.Equipos.Services.DataService;
+using Mindden.Equipos.Configuration;
+using Mindden.Equipos.Application.Services;
+using Mindden.Equipos.Application.Response;
+using Mindden.Equipos.Application.DataService;
 using System.Linq;
 
 namespace Mindden.Equipos.Tests.Services
