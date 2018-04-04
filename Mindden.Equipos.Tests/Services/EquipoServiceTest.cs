@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Mindden.Equipos.Infrastructure.Data;
 using Mindden.Equipos.Configuration;
 using Mindden.Equipos.Application.Services;
-using Mindden.Equipos.Application.Response;
+using Mindden.Equipos.Application.Responses;
 using Mindden.Equipos.Application.DataService;
 using System.Linq;
 
@@ -22,14 +22,16 @@ namespace Mindden.Equipos.Tests.Services
             // Crea proveedor de servicio 
             // instancia base de datos en memoria.
             var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
+                .AddEntityFrameworkSqlServer()
+                //.AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
 
             // Crea instancia pasando opciones al contexto a usar
             // para base de datos en memoria y al nuevo proveedor de servicio
             var builder = new DbContextOptionsBuilder<EquiposContext>();
-            builder.UseInMemoryDatabase("ZeusTeam")
+            builder.UseSqlServer("Data Source=localhost;Initial Catalog=ZeusTeam;Integrated Security=True")
+            //builder.UseInMemoryDatabase("ZeusTeam")
                    .UseInternalServiceProvider(serviceProvider);
 
             return builder.Options;
@@ -147,7 +149,7 @@ namespace Mindden.Equipos.Tests.Services
             ListarEquiposResponse responseListar = equipoService.ListarEquipos();
 
             Assert.True(responseListar.Status == StatusEnum.CorrectOperation);
-            Assert.True(responseListar.Equipos.Count == 10);
+            Assert.True(responseListar.Equipos.Count > 1);
 
              
 
@@ -197,8 +199,8 @@ namespace Mindden.Equipos.Tests.Services
         private EquipoRepository GetRepository()
         {
 
-            DataMap.Reset();
-            DataMap.Register();
+            EquiposDataMap.Reset();
+            EquiposDataMap.Register();
 
             var options = CreateNewContextOptions();
 

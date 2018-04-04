@@ -1,5 +1,5 @@
 ﻿using Mindden.Equipos.Application.DataService;
-using Mindden.Equipos.Application.Response;
+using Mindden.Equipos.Application.Responses;
 
 namespace Mindden.Equipos.Application.Interfaces
 {

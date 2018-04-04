@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Runtime.CompilerServices;
 
+
 [assembly: InternalsVisibleTo("Mindden.Equipos.Tests")]
 namespace Mindden.Equipos.Infrastructure.Data
 {
@@ -15,6 +16,7 @@ namespace Mindden.Equipos.Infrastructure.Data
         /// <param name="options">The options.</param>
         public EquiposContext(DbContextOptions<EquiposContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         /// <summary>
@@ -32,7 +34,7 @@ namespace Mindden.Equipos.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Equipo>(ConfigureEquipo);            
-        }
+        }        
 
         /// <summary>
         /// Configures the equipo.

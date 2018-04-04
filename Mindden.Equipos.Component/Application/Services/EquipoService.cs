@@ -2,7 +2,7 @@
 using Mindden.Equipos.Core.Entities.EquipoAggregate;
 using Mindden.Equipos.Core.Interfaces;
 using Mindden.Equipos.Application.DataService;
-using Mindden.Equipos.Application.Response;
+using Mindden.Equipos.Application.Responses;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
