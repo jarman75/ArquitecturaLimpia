@@ -17,9 +17,9 @@ namespace Mindden.Equipos.Tests.Infrastructure
         {
             // Crea proveedor de servicio 
             // instancia base de datos en memoria.
-            var serviceProvider = new ServiceCollection()                
-                .AddEntityFrameworkInMemoryDatabase()                
-                .BuildServiceProvider();                
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
 
 
             // Crea instancia pasando opciones al contexto a usar

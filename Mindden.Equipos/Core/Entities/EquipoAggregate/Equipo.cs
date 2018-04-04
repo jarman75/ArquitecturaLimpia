@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mindden.Equipos.Core.Common;
 using Mindden.Equipos.Core.Interfaces;
 
 
 namespace Mindden.Equipos.Core.Entities.EquipoAggregate
 {
     //Agregate Root : Raiz agregado    
-    public class Equipo : BaseEquipo, IAggregateRoot
+    public class Equipo : BaseEntity, IAggregateRoot
     {
 
         /// <summary>
         /// Prevents a default instance of the <see cref="Equipo"/> class from being created.
         /// </summary>
-        private Equipo()
+        public Equipo()
         {
-        }
+        }        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Equipo"/> class.
@@ -22,12 +23,37 @@ namespace Mindden.Equipos.Core.Entities.EquipoAggregate
         /// <param name="NombreEquipo">The nombre equipo.</param>
         /// <param name="ciudad">The ciudad.</param>
         /// <param name="cliente">The cliente.</param>
-        public Equipo(string NombreEquipo, string ciudad, string cliente)
+        public Equipo(string nombreEquipo, string ciudad, string cliente)
         {
-            this.NombreEquipo = NombreEquipo;                        
+            this.NombreEquipo = nombreEquipo;                        
             this.Ubicacion = new UbicacionEquipo(ciudad, cliente);
         }
-        
+
+        /// <summary>
+        /// The nombre equipo
+        /// </summary>
+        private string _nombreEquipo;
+
+        /// <summary>
+        /// Gets or sets the nombre equipo.
+        /// </summary>
+        /// <value>
+        /// The nombre equipo.
+        /// </value>
+        /// <exception cref="System.ArgumentException">Nombre de equipo requerido. - NombreEquipo</exception>
+        public String NombreEquipo
+        {
+            get { return _nombreEquipo; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Nombre de equipo requerido.", nameof(NombreEquipo));
+                }
+                _nombreEquipo = value;
+            }
+        }
+
         /// <summary>
         /// The desarrolladores
         /// </summary>

@@ -1,6 +1,6 @@
-﻿namespace Mindden.Equipos.Core.Entities
+﻿namespace Mindden.Equipos.Core.Common
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
 
         /// <summary>

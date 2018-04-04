@@ -26,5 +26,11 @@
         /// The not processed operation
         /// </summary>
         NotProcessedOperation = 4,
+
+        /// <summary>
+        /// The null excepcion
+        /// </summary>
+        NullExcepcion = 5,
+        
     }
 }
