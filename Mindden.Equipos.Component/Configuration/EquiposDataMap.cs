@@ -6,7 +6,7 @@ using Mindden.Equipos.Application.DataService;
 namespace Mindden.Equipos.Configuration
 {
 
-    public static class EquiposDataMap
+    internal static class EquiposDataMap
 {
 
         public static void Register()

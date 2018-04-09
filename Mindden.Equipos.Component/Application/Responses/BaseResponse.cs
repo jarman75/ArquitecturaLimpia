@@ -16,6 +16,12 @@
             this.Status = status;
         }
 
+        public BaseResponse()
+        {
+            this.ErrorMessage = string.Empty;
+            this.Status = StatusEnum.NotProcessedOperation;
+        }
+
         /// <summary>
         /// Gets the status.
         /// </summary>

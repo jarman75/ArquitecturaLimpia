@@ -8,7 +8,7 @@ namespace Mindden.Equipos.Infrastructure.Test
     {
         
 
-        private static DbContextOptions<EquiposContext> CreateNewContextOptions()
+        public static DbContextOptions<EquiposContext> CreateNewContextOptions()
         {
 
             var serviceProvider = new ServiceCollection()
@@ -22,7 +22,7 @@ namespace Mindden.Equipos.Infrastructure.Test
             return builder.Options;            
         }
 
-        private static DbContextOptions<EquiposContext> CreateNewContextInMemoryOptions(string MemoryDataBase)
+        public static DbContextOptions<EquiposContext> CreateNewContextInMemoryOptions(string MemoryDataBase)
         {
 
             var serviceProvider = new ServiceCollection()

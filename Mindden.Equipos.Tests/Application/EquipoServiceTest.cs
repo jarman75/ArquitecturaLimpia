@@ -9,7 +9,6 @@ using Mindden.Equipos.Application.Services;
 using Mindden.Equipos.Application.Responses;
 using Mindden.Equipos.Application.DataService;
 using Mindden.Equipos.Infrastructure.Test;
-using StructureMap;
 
 
 namespace Mindden.Equipos.Tests.Application
@@ -26,34 +25,19 @@ namespace Mindden.Equipos.Tests.Application
             EquiposDataMap.Reset();
             EquiposDataMap.Register();
 
-            repository = EquiposEFContextTest.GetRepository("ZeusTeam");
+            repository = EquiposEFContextTest.GetRepository();
         }
-
-        private void InitTestIoC()
-        {
-            EquiposDataMap.Reset();
-            EquiposDataMap.Register();
-
-            repository = EquiposEFContextTest.GetRepository("ZeusTeam");
-            var container = new Container(x =>
-           {               
-               x.For<IEquipoService>().Use<EquipoService>().Ctor<IEquipoRepository>().Is(repository);
-           });
-
-            service = container.GetInstance<IEquipoService>();
-          
-            
-            
-        }
+        
 
         [Fact]
         public void CrearEquipoTest_IoC()
         {
-            InitTestIoC();
+            InitTest();
+            this.service = new EquipoService(repository);
 
             List<DtoDesarrollador> informaticos = new List<DtoDesarrollador>();
             DSEquipo ds;
-            CrearEquipoResponse responseCreate;
+            CrearEquipoResponse responseCreate = new CrearEquipoResponse(StatusEnum.NotProcessedOperation) ;
             
             //create correct operation            
             informaticos.Clear();

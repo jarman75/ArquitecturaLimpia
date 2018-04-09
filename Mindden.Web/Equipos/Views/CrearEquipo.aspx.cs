@@ -1,31 +1,63 @@
 ﻿using System;
-using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using Mindden.Web.Equipos.Models;
 using Mindden.Equipos.Application.Interfaces;
 using Mindden.Equipos.Application.DataService;
-using Mindden.Equipos.Core.Interfaces;
-
+using Mindden.Equipos.Configuration;
+using Mindden.Equipos.Application.Responses;
+using StructureMap;
 
 namespace Mindden.Web.Equipos.Views
 {
-    public partial class CrearEquipo : BasePageWithEquipoIoC
+    public partial class CrearEquipo : System.Web.UI.Page
     {
-        
-        public IEquipoRepository EquipoRepository { get; set; }
-        public IEquipoService EquipoService { get; set; }        
-        
+
+        private EquipoViewModel viewModel = new EquipoViewModel();
+        public List<EquipoViewModel> listModel { get; set; }
+
+
+        //public IEquipoService EquipoService { get; set; }
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            base.OnLoad(e);
 
-            this.FormView1.ChangeMode(FormViewMode.Insert);
+            if (!IsPostBack)
+            {
+                ListarEquipos();
 
-            
+            }
         }
 
-        public void InsertItem(EquipoViewModel viewModel)
+        private void ListarEquipos()
         {
+            //contanier IoC SructureMap
+            var container = new Container(new EquiposRegister());
+            IEquipoService equipoService = container.GetInstance<IEquipoService>();
+
+            ListarEquiposResponse response = equipoService.ListarEquipos();
+            if (response.Status == StatusEnum.CorrectOperation)
+            {
+                listModel = new List<EquipoViewModel>();
+                foreach (DtoBasicEquipo e in response.Equipos)
+                {
+                    listModel.Clear();
+                    listModel.Add(new EquipoViewModel { NombrEquipo = e.NombreEquipo, Cliente = "", Ubicacion = "" });
+                }
+
+                this.Repeater1.DataSource = listModel;
+                this.Repeater1.DataBind();
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+            viewModel.Cliente = this.TextCliente.Text;
+            viewModel.NombrEquipo = this.TextName.Text;
+            viewModel.Ubicacion = this.TextUbicacion.Text;
+
             if (!this.ModelState.IsValid)
             {
                 return;
@@ -33,19 +65,21 @@ namespace Mindden.Web.Equipos.Views
 
             try
             {
+                //contanier IoC SructureMap
+                var container = new Container(new EquiposRegister());
+                IEquipoService equipoService = container.GetInstance<IEquipoService>();
+                                
 
                 List<DtoDesarrollador> desarrolladores = new List<DtoDesarrollador>() { new DtoDesarrollador("Lider", "AliasLider", 20) };
                 DSEquipo ds = new DSEquipo(viewModel.NombrEquipo, viewModel.Ubicacion, viewModel.Cliente, desarrolladores);
-                EquipoService.CrearEquipo(ds);
+                CrearEquipoResponse response = equipoService.CrearEquipo(ds);
+
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.Write(ex.Message);
             }
+
         }
-
-        
-
-        
     }
 }

@@ -4,9 +4,20 @@ using Mindden.Equipos.Infrastructure.Data;
 
 namespace Mindden.Equipos.Configuration
 {
-    public static class EquiposEFContext
-    {
-        public static void ConfigureServices()
+    internal static class EquiposEFContext
+    {            
+                
+        public static EquipoRepository GetRepository(string connectionString)
+        {
+            EquiposContext _dbContext;
+
+            var options = CreateNewContextOptions(connectionString);
+
+            _dbContext = new EquiposContext(options);
+            return new EquipoRepository(_dbContext);
+        }
+
+        private static DbContextOptions<EquiposContext> CreateNewContextOptions(string connectionString)
         {
 
             var serviceProvider = new ServiceCollection()
@@ -14,10 +25,10 @@ namespace Mindden.Equipos.Configuration
                 .BuildServiceProvider();
 
             var builder = new DbContextOptionsBuilder<EquiposContext>();
-            builder.UseSqlServer("Data Source = localhost; Initial Catalog = ZeusTeam; Integrated Security = True")
+            builder.UseSqlServer(connectionString)
                    .UseInternalServiceProvider(serviceProvider);
 
-            
+            return builder.Options;
         }
 
     }
